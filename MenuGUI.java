@@ -97,7 +97,7 @@ public class MenuGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewRoutesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRoutesBtnActionPerformed
-        SavedRoutesGUI savedGUI = new SavedRoutesGUI();
+        RecentRoutesGUI savedGUI = new RecentRoutesGUI();
         savedGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_viewRoutesBtnActionPerformed

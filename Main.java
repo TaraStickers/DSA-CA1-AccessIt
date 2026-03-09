@@ -14,5 +14,6 @@ public class Main {
         java.awt.EventQueue.invokeLater(() -> {
             new MenuGUI().setVisible(true);
         });
+        
     }
 }
