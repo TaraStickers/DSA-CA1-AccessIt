@@ -11,7 +11,7 @@ package com.mycompany.dsa.ca1;
 public class AddRouteGUI extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddRouteGUI.class.getName());
-
+    private RouteLinkedList routeList = new RouteLinkedList();
     /**
      * Creates new form AddRouteGUI
      */
@@ -233,7 +233,18 @@ public class AddRouteGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_wheelchairRouteCheckActionPerformed
 
     private void addRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRouteButtonActionPerformed
-        // TODO add your handling code here:
+        //accept user input
+        String routeID = routeIDInput.getText();
+        String start = startInput.getText();
+        String end = endInput.getText();
+        double distance = Double.parseDouble(distanceInput.getText());
+        //create new route object with valurs
+        Route newRoute = new Route(routeID, start, end, distance);
+        routeList.add(newRoute);
+
+        //test
+        System.out.println(routeList.printList());
+
     }//GEN-LAST:event_addRouteButtonActionPerformed
 
     /**
