@@ -238,10 +238,31 @@ public class AddRouteGUI extends javax.swing.JFrame {
         String start = startInput.getText();
         String end = endInput.getText();
         double distance = Double.parseDouble(distanceInput.getText());
+        boolean walkingRoute = walkingRouteCheck.isSelected();
+        boolean wheelchairRoute = wheelchairRouteCheck.isSelected();
+        
         //create new route object with valurs
-        Route newRoute = new Route(routeID, start, end, distance);
+        Route newRoute;
+        
+        //if walking route true (selected)
+        if(walkingRoute) {
+            boolean hasStairs = hasStairsCheck.isSelected();
+            //add new walking route with stairs info
+            newRoute = new WalkingRoute (routeID, start, end, distance, hasStairs);
+        }
+        //if wheelchair route true (selected)
+        else if (wheelchairRoute) {
+            boolean hasLifts = hasLiftsCheck.isSelected();
+            boolean hasRamps = hasRampsCheck.isSelected();
+            //add new wheelchair route with ramps and lifts info 
+            newRoute = new WheelchairRoute (routeID, start, end, distance, hasLifts, hasRamps);
+        }
+        //create normal route if none selected
+        else {
+            newRoute = new Route(routeID, start, end, distance);
+        }
         routeList.add(newRoute);
-
+        
         //test
         System.out.println(routeList.printList());
 
