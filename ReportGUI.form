@@ -158,6 +158,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Report Obstacle"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reportObstacleBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="descriptionLabel">
       <Properties>
@@ -187,7 +190,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextPane" name="descriptionInput1">
+        <Component class="javax.swing.JTextPane" name="routeIDInput">
         </Component>
       </SubComponents>
     </Container>

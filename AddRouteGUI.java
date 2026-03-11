@@ -65,7 +65,7 @@ public class AddRouteGUI extends javax.swing.JFrame {
         routeIDLabel.setText("Route name/ID:");
 
         distanceLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        distanceLabel.setText("Distance:");
+        distanceLabel.setText("Distance (km):");
 
         routeIDInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

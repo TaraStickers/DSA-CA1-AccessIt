@@ -9,7 +9,7 @@ package com.mycompany.dsa.ca1;
  * @author taraj
  */
 public class ReportGUI extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReportGUI.class.getName());
 
     /**
@@ -20,7 +20,7 @@ public class ReportGUI extends javax.swing.JFrame {
         //hide extra options
         walkingBarriers.setVisible(false);
         wheelchairBarriers.setVisible(false);
-        
+
     }
 
     /**
@@ -46,7 +46,7 @@ public class ReportGUI extends javax.swing.JFrame {
         descriptionInput = new javax.swing.JTextPane();
         routeIDBarrierLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        descriptionInput1 = new javax.swing.JTextPane();
+        routeIDInput = new javax.swing.JTextPane();
         walkingBarriers = new javax.swing.JLayeredPane();
         walkingWeather = new javax.swing.JRadioButton();
         walkingSteepPath = new javax.swing.JRadioButton();
@@ -76,6 +76,7 @@ public class ReportGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(barrierLocationInput);
 
         reportObstacleBtn.setText("Report Obstacle");
+        reportObstacleBtn.addActionListener(this::reportObstacleBtnActionPerformed);
 
         descriptionLabel.setText("Description:");
 
@@ -83,7 +84,7 @@ public class ReportGUI extends javax.swing.JFrame {
 
         routeIDBarrierLabel.setText("Route ID (Optional)");
 
-        jScrollPane3.setViewportView(descriptionInput1);
+        jScrollPane3.setViewportView(routeIDInput);
 
         reportWalkRadio.add(walkingWeather);
         walkingWeather.setText("Weather conditions");
@@ -259,7 +260,7 @@ public class ReportGUI extends javax.swing.JFrame {
         boolean selected = wheelchairBarrierSelected.isSelected();
         //show options if wheelchair barrier is selected
         wheelchairBarriers.setVisible(selected);
-        
+
     }//GEN-LAST:event_wheelchairBarrierSelectedActionPerformed
 
     private void walkingBarrierSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_walkingBarrierSelectedActionPerformed
@@ -278,17 +279,57 @@ public class ReportGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_barrierBackBtnActionPerformed
 
+    private void reportObstacleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportObstacleBtnActionPerformed
+        String location = barrierLocationInput.getText();
+        String description = descriptionInput.getText();
+        String routeID = routeIDInput.getText();
+        String barrierType = "";
+        String subType = "";
+        //if its a walking barrier
+        if (walkingBarrierSelected.isSelected()) {
+            barrierType = "Walking";
+            //check type of obstruction and set subType 
+            if (walkingPhysicalObstruction.isSelected()) {
+                subType = "Physical obstruction";
+            } else if (walkingSteepPath.isSelected()) {
+                subType = "Steep or difficult path";
+            } else if (walkingWeather.isSelected()) {
+                subType = "Weather conditions";
+            } else if (walkingTrafficHazard.isSelected()) {
+                subType = "Traffic hazard";
+            }
+        //if its a wheelchair barrier
+        } else if (wheelchairBarrierSelected.isSelected()) {
+            barrierType = "Wheelchair";
+            //check type and set subtype
+            if (noRamp.isSelected()) {
+                subType = "No ramp";
+            } else if (noLift.isSelected()) {
+                subType = "No lift";
+            } else if (badSurfacee.isSelected()) {
+                subType = "Bad surface";
+            } else if (narrowCorridors.isSelected()) {
+                subType = "Narrow corridors";
+            } else if (physicalObstruction.isSelected()) {
+                subType = "Physical obstruction";
+            }
+        }
+        //set newObstacle object 
+        Obstacles newObstacle = new Obstacles(location, description, routeID, barrierType, subType);
+        //add newobstacle to queie here later
+        
+        
+    }//GEN-LAST:event_reportObstacleBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton badSurfacee;
     private javax.swing.JButton barrierBackBtn;
     private javax.swing.JTextPane barrierLocationInput;
     private javax.swing.JTextPane descriptionInput;
-    private javax.swing.JTextPane descriptionInput1;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -303,6 +344,7 @@ public class ReportGUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup reportWalkRadio;
     private javax.swing.ButtonGroup reportWheelchairRadio;
     private javax.swing.JLabel routeIDBarrierLabel;
+    private javax.swing.JTextPane routeIDInput;
     private javax.swing.JRadioButton walkingBarrierSelected;
     private javax.swing.JLayeredPane walkingBarriers;
     private javax.swing.JRadioButton walkingPhysicalObstruction;

@@ -32,6 +32,7 @@ public class MenuGUI extends javax.swing.JFrame {
         addRouteBtn = new javax.swing.JButton();
         viewRoutesBtn = new javax.swing.JButton();
         reportBtn = new javax.swing.JButton();
+        viewObstaclesBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +60,13 @@ public class MenuGUI extends javax.swing.JFrame {
             }
         });
 
+        viewObstaclesBtn.setText("View Obstacles");
+        viewObstaclesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewObstaclesBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,8 +83,10 @@ public class MenuGUI extends javax.swing.JFrame {
                         .addGap(118, 118, 118)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(reportBtn)))
+                        .addContainerGap()
+                        .addComponent(reportBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(viewObstaclesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -89,7 +99,9 @@ public class MenuGUI extends javax.swing.JFrame {
                     .addComponent(addRouteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewRoutesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(reportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(reportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewObstaclesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
 
@@ -114,6 +126,12 @@ public class MenuGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_addRouteBtnActionPerformed
 
+    private void viewObstaclesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewObstaclesBtnActionPerformed
+        ObstaclesListGUI obstaclesGUI = new ObstaclesListGUI();
+        obstaclesGUI.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_viewObstaclesBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -123,6 +141,7 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JButton addRouteBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton reportBtn;
+    private javax.swing.JButton viewObstaclesBtn;
     private javax.swing.JButton viewRoutesBtn;
     // End of variables declaration//GEN-END:variables
 }
