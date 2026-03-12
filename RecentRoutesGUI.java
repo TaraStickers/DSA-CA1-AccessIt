@@ -11,13 +11,12 @@ package com.mycompany.dsa.ca1;
 public class RecentRoutesGUI extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RecentRoutesGUI.class.getName());
-    private RouteLinkedList routes;
+
     /**
      * Creates new form RecentRoutesGUI
      */
-    public RecentRoutesGUI(RouteLinkedList routes) {
+    public RecentRoutesGUI() {
         initComponents();
-        this.routes = routes;
     }
 
     /**
@@ -32,8 +31,9 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
         SavedRoutesGUILabel = new javax.swing.JLabel();
         savedBackBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        recentRoutesTextBox = new javax.swing.JTextArea();
-        getRoutesBtn = new javax.swing.JButton();
+        recentRoutesOutput = new javax.swing.JTextArea();
+        showRecentBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,44 +43,51 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
         savedBackBtn.setText("Back");
         savedBackBtn.addActionListener(this::savedBackBtnActionPerformed);
 
-        recentRoutesTextBox.setColumns(20);
-        recentRoutesTextBox.setRows(5);
-        jScrollPane2.setViewportView(recentRoutesTextBox);
+        recentRoutesOutput.setColumns(20);
+        recentRoutesOutput.setRows(5);
+        jScrollPane2.setViewportView(recentRoutesOutput);
 
-        getRoutesBtn.setText("Get routes");
-        getRoutesBtn.addActionListener(this::getRoutesBtnActionPerformed);
+        showRecentBtn.setText("Show recent routes");
+        showRecentBtn.addActionListener(this::showRecentBtnActionPerformed);
+
+        jButton1.setText("Delete most recent");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(SavedRoutesGUILabel)
-                        .addGap(202, 202, 202))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(96, 96, 96))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(getRoutesBtn)
-                        .addGap(40, 40, 40)
-                        .addComponent(savedBackBtn)
-                        .addGap(163, 163, 163))))
+                        .addGap(202, 202, 202))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(savedBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(showRecentBtn)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(SavedRoutesGUILabel)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(savedBackBtn)
-                    .addComponent(getRoutesBtn))
-                .addGap(24, 24, 24))
+                    .addComponent(showRecentBtn)
+                    .addComponent(jButton1))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -92,9 +99,13 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_savedBackBtnActionPerformed
 
-    private void getRoutesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getRoutesBtnActionPerformed
-        recentRoutesTextBox.setText(routes.printList());
-    }//GEN-LAST:event_getRoutesBtnActionPerformed
+    private void showRecentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showRecentBtnActionPerformed
+        recentRoutesOutput.setText(RecentRoutes.s.toString());
+    }//GEN-LAST:event_showRecentBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        RecentRoutes.deleteRecent();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,9 +114,10 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel SavedRoutesGUILabel;
-    private javax.swing.JButton getRoutesBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea recentRoutesTextBox;
+    private javax.swing.JTextArea recentRoutesOutput;
     private javax.swing.JButton savedBackBtn;
+    private javax.swing.JButton showRecentBtn;
     // End of variables declaration//GEN-END:variables
 }

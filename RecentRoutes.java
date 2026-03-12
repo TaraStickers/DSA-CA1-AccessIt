@@ -11,7 +11,14 @@ import java.util.Stack;
  * @author taraj
  */
 public class RecentRoutes {
-    public static Stack<Integer> s = new Stack<>();
-
+    public static Stack<Route> s = new Stack<>();
     
+    //delete most recent stack item
+    public static void deleteRecent() {
+        //if stack is not empty
+        if(!s.isEmpty()) {
+            //pop (delete)
+            s.pop();
+        }
+    }
 }
