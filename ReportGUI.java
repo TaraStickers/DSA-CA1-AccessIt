@@ -11,11 +11,13 @@ package com.mycompany.dsa.ca1;
 public class ReportGUI extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReportGUI.class.getName());
-
+    private ObstaclesQueue obstaclesQueue;
+    
     /**
      * Creates new form ReportGUI
      */
-    public ReportGUI() {
+    public ReportGUI(ObstaclesQueue obstaclesQueue) {
+        this.obstaclesQueue = obstaclesQueue;
         initComponents();
         //hide extra options
         walkingBarriers.setVisible(false);
@@ -34,6 +36,7 @@ public class ReportGUI extends javax.swing.JFrame {
 
         reportWalkRadio = new javax.swing.ButtonGroup();
         reportWheelchairRadio = new javax.swing.ButtonGroup();
+        typeOfBarrier = new javax.swing.ButtonGroup();
         reportGUILabel = new javax.swing.JLabel();
         walkingBarrierSelected = new javax.swing.JRadioButton();
         wheelchairBarrierSelected = new javax.swing.JRadioButton();
@@ -52,22 +55,24 @@ public class ReportGUI extends javax.swing.JFrame {
         walkingSteepPath = new javax.swing.JRadioButton();
         walkingTrafficHazard = new javax.swing.JRadioButton();
         walkingPhysicalObstruction = new javax.swing.JRadioButton();
+        barrierBackBtn = new javax.swing.JButton();
         wheelchairBarriers = new javax.swing.JLayeredPane();
         noLift = new javax.swing.JRadioButton();
+        noRamp = new javax.swing.JRadioButton();
         narrowCorridors = new javax.swing.JRadioButton();
         badSurfacee = new javax.swing.JRadioButton();
         physicalObstruction = new javax.swing.JRadioButton();
-        noRamp = new javax.swing.JRadioButton();
-        barrierBackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        reportGUILabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        reportGUILabel.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 36)); // NOI18N
         reportGUILabel.setText("Report barriers or obstacles");
 
+        typeOfBarrier.add(walkingBarrierSelected);
         walkingBarrierSelected.setText("Walking barrier");
         walkingBarrierSelected.addActionListener(this::walkingBarrierSelectedActionPerformed);
 
+        typeOfBarrier.add(wheelchairBarrierSelected);
         wheelchairBarrierSelected.setText("Wheelchair Barrier");
         wheelchairBarrierSelected.addActionListener(this::wheelchairBarrierSelectedActionPerformed);
 
@@ -107,19 +112,17 @@ public class ReportGUI extends javax.swing.JFrame {
         walkingBarriers.setLayout(walkingBarriersLayout);
         walkingBarriersLayout.setHorizontalGroup(
             walkingBarriersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(walkingBarriersLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, walkingBarriersLayout.createSequentialGroup()
+                .addGap(0, 22, Short.MAX_VALUE)
                 .addGroup(walkingBarriersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(walkingSteepPath)
-                    .addComponent(walkingPhysicalObstruction)
+                    .addComponent(walkingTrafficHazard)
                     .addComponent(walkingWeather)
-                    .addComponent(walkingTrafficHazard))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(walkingSteepPath)
+                    .addComponent(walkingPhysicalObstruction)))
         );
         walkingBarriersLayout.setVerticalGroup(
             walkingBarriersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(walkingBarriersLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(walkingPhysicalObstruction)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(walkingSteepPath)
@@ -130,9 +133,15 @@ public class ReportGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        barrierBackBtn.setText("Go Back");
+        barrierBackBtn.addActionListener(this::barrierBackBtnActionPerformed);
+
         reportWheelchairRadio.add(noLift);
         noLift.setText("No lift");
         noLift.addActionListener(this::noLiftActionPerformed);
+
+        reportWheelchairRadio.add(noRamp);
+        noRamp.setText("No ramp");
 
         reportWheelchairRadio.add(narrowCorridors);
         narrowCorridors.setText("Narrow corridors or doors");
@@ -142,15 +151,13 @@ public class ReportGUI extends javax.swing.JFrame {
 
         reportWheelchairRadio.add(physicalObstruction);
         physicalObstruction.setText("Physical obstruction");
-
-        reportWheelchairRadio.add(noRamp);
-        noRamp.setText("No ramp");
+        physicalObstruction.addActionListener(this::physicalObstructionActionPerformed);
 
         wheelchairBarriers.setLayer(noLift, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        wheelchairBarriers.setLayer(noRamp, javax.swing.JLayeredPane.DEFAULT_LAYER);
         wheelchairBarriers.setLayer(narrowCorridors, javax.swing.JLayeredPane.DEFAULT_LAYER);
         wheelchairBarriers.setLayer(badSurfacee, javax.swing.JLayeredPane.DEFAULT_LAYER);
         wheelchairBarriers.setLayer(physicalObstruction, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        wheelchairBarriers.setLayer(noRamp, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout wheelchairBarriersLayout = new javax.swing.GroupLayout(wheelchairBarriers);
         wheelchairBarriers.setLayout(wheelchairBarriersLayout);
@@ -159,77 +166,82 @@ public class ReportGUI extends javax.swing.JFrame {
             .addGroup(wheelchairBarriersLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(wheelchairBarriersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(noRamp)
-                    .addComponent(noLift, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(badSurfacee, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(narrowCorridors)
-                    .addComponent(physicalObstruction))
-                .addContainerGap())
+                    .addGroup(wheelchairBarriersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(noLift, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(badSurfacee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(narrowCorridors, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(physicalObstruction, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(noRamp))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        wheelchairBarriersLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {badSurfacee, narrowCorridors, noLift, noRamp, physicalObstruction});
+
         wheelchairBarriersLayout.setVerticalGroup(
             wheelchairBarriersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(wheelchairBarriersLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(noRamp)
+                .addComponent(noRamp, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(noLift)
+                .addComponent(noLift, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(badSurfacee)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(narrowCorridors)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(physicalObstruction)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        barrierBackBtn.setText("Go Back");
-        barrierBackBtn.addActionListener(this::barrierBackBtnActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(reportGUILabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(routeIDBarrierLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(locationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(descriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(jScrollPane2)
-                                    .addComponent(jScrollPane3)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(walkingBarrierSelected)
-                                    .addComponent(walkingBarriers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(barrierBackBtn))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(wheelchairBarriers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(wheelchairBarrierSelected)
-                                    .addComponent(reportObstacleBtn))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(routeIDBarrierLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(locationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(descriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane3))
                 .addGap(83, 83, 83))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addComponent(reportGUILabel)
+                .addGap(96, 96, 96))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(walkingBarriers, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(barrierBackBtn, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(65, 65, 65))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(walkingBarrierSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(reportObstacleBtn)
+                    .addComponent(wheelchairBarriers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(wheelchairBarrierSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(120, 120, 120))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {barrierBackBtn, reportObstacleBtn});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(42, 42, 42)
                 .addComponent(reportGUILabel)
-                .addGap(18, 18, 18)
+                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
-                    .addComponent(locationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(locationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
@@ -238,19 +250,22 @@ public class ReportGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3)
                     .addComponent(routeIDBarrierLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(wheelchairBarrierSelected)
                     .addComponent(walkingBarrierSelected))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(wheelchairBarriers)
-                    .addComponent(walkingBarriers))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(walkingBarriers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(wheelchairBarriers)
+                        .addGap(42, 42, 42)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(reportObstacleBtn)
                     .addComponent(barrierBackBtn))
-                .addGap(30, 30, 30))
+                .addGap(43, 43, 43))
         );
 
         pack();
@@ -268,10 +283,6 @@ public class ReportGUI extends javax.swing.JFrame {
         //show options if walking barrier is selected
         walkingBarriers.setVisible(selected);
     }//GEN-LAST:event_walkingBarrierSelectedActionPerformed
-
-    private void noLiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noLiftActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_noLiftActionPerformed
 
     private void barrierBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barrierBackBtnActionPerformed
         MenuGUI menuGui = new MenuGUI();
@@ -316,10 +327,19 @@ public class ReportGUI extends javax.swing.JFrame {
         }
         //set newObstacle object 
         Obstacles newObstacle = new Obstacles(location, description, routeID, barrierType, subType);
-        //add newobstacle to queie here later
+        //add newobstacle to queie 
+        obstaclesQueue.enqueue(newObstacle);
         
         
     }//GEN-LAST:event_reportObstacleBtnActionPerformed
+
+    private void physicalObstructionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_physicalObstructionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_physicalObstructionActionPerformed
+
+    private void noLiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noLiftActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noLiftActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,6 +365,7 @@ public class ReportGUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup reportWheelchairRadio;
     private javax.swing.JLabel routeIDBarrierLabel;
     private javax.swing.JTextPane routeIDInput;
+    private javax.swing.ButtonGroup typeOfBarrier;
     private javax.swing.JRadioButton walkingBarrierSelected;
     private javax.swing.JLayeredPane walkingBarriers;
     private javax.swing.JRadioButton walkingPhysicalObstruction;

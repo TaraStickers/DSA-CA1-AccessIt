@@ -11,12 +11,13 @@ package com.mycompany.dsa.ca1;
 public class AddRouteGUI extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddRouteGUI.class.getName());
-    private RouteLinkedList routeList = new RouteLinkedList();
+    private RouteLinkedList routeList;
     /**
      * Creates new form AddRouteGUI
      */
-    public AddRouteGUI() {
+    public AddRouteGUI(RouteLinkedList routeList) {
         initComponents();
+        this.routeList = routeList;
         //hide extra options as default
         hasRampsCheck.setVisible(false);
         hasLiftsCheck.setVisible(false);
@@ -33,6 +34,7 @@ public class AddRouteGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         addRouteGUILabel = new javax.swing.JLabel();
         startLabel = new javax.swing.JLabel();
         endLabel = new javax.swing.JLabel();
@@ -42,15 +44,16 @@ public class AddRouteGUI extends javax.swing.JFrame {
         endInput = new javax.swing.JTextField();
         routeIDInput = new javax.swing.JTextField();
         distanceInput = new javax.swing.JTextField();
-        walkingRouteCheck = new javax.swing.JCheckBox();
-        wheelchairRouteCheck = new javax.swing.JCheckBox();
         hasLiftsCheck = new javax.swing.JCheckBox();
         hasRampsCheck = new javax.swing.JCheckBox();
         hasStairsCheck = new javax.swing.JCheckBox();
         addRouteBack = new javax.swing.JButton();
         addRouteButton = new javax.swing.JButton();
+        wheelchairRouteCheck = new javax.swing.JRadioButton();
+        walkingRouteCheck = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         addRouteGUILabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         addRouteGUILabel.setText("Add a new route");
@@ -70,20 +73,6 @@ public class AddRouteGUI extends javax.swing.JFrame {
         routeIDInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 routeIDInputActionPerformed(evt);
-            }
-        });
-
-        walkingRouteCheck.setText("Walking route");
-        walkingRouteCheck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                walkingRouteCheckActionPerformed(evt);
-            }
-        });
-
-        wheelchairRouteCheck.setText("Wheelchair route");
-        wheelchairRouteCheck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                wheelchairRouteCheckActionPerformed(evt);
             }
         });
 
@@ -114,6 +103,22 @@ public class AddRouteGUI extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(wheelchairRouteCheck);
+        wheelchairRouteCheck.setText("Wheelchair Route");
+        wheelchairRouteCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wheelchairRouteCheckActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(walkingRouteCheck);
+        walkingRouteCheck.setText("Walking Route");
+        walkingRouteCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                walkingRouteCheckActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,17 +146,18 @@ public class AddRouteGUI extends javax.swing.JFrame {
                                 .addComponent(addRouteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(walkingRouteCheck)
-                                        .addComponent(hasStairsCheck))
-                                    .addGap(100, 100, 100)
+                                        .addComponent(hasStairsCheck)
+                                        .addComponent(walkingRouteCheck))
+                                    .addGap(97, 97, 97)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(wheelchairRouteCheck)
                                         .addComponent(hasRampsCheck)
-                                        .addComponent(hasLiftsCheck))))))
+                                        .addComponent(hasLiftsCheck)
+                                        .addComponent(wheelchairRouteCheck))
+                                    .addGap(13, 13, 13)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(171, 171, 171)
                         .addComponent(addRouteBack, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +183,7 @@ public class AddRouteGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(distanceLabel)
                     .addComponent(distanceInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(wheelchairRouteCheck)
                     .addComponent(walkingRouteCheck))
@@ -192,7 +198,7 @@ public class AddRouteGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addRouteBack, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addRouteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -211,26 +217,6 @@ public class AddRouteGUI extends javax.swing.JFrame {
         menuGui.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addRouteBackActionPerformed
-
-    private void walkingRouteCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_walkingRouteCheckActionPerformed
-        //if walking route checked, show stairs option
-        boolean selected = walkingRouteCheck.isSelected();
-        hasStairsCheck.setVisible(selected);
-        if (!selected) {
-            hasStairsCheck.setSelected(false);
-        }
-    }//GEN-LAST:event_walkingRouteCheckActionPerformed
-
-    private void wheelchairRouteCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wheelchairRouteCheckActionPerformed
-        // show ramp and lifts option if wheelchair route is slected
-        boolean selected = wheelchairRouteCheck.isSelected();
-        hasRampsCheck.setVisible(selected);
-        hasLiftsCheck.setVisible(selected);
-        if (!selected) {
-            hasRampsCheck.setSelected(false);
-            hasLiftsCheck.setSelected(false);
-        }
-    }//GEN-LAST:event_wheelchairRouteCheckActionPerformed
 
     private void addRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRouteButtonActionPerformed
         //accept user input
@@ -268,6 +254,29 @@ public class AddRouteGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_addRouteButtonActionPerformed
 
+    private void wheelchairRouteCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wheelchairRouteCheckActionPerformed
+        // show ramp and lifts option if wheelchair route is slected
+        boolean selected = wheelchairRouteCheck.isSelected();
+        hasRampsCheck.setVisible(selected);
+        hasLiftsCheck.setVisible(selected);
+        hasStairsCheck.setVisible(false);
+        if (!selected) {
+            hasRampsCheck.setSelected(false);
+            hasLiftsCheck.setSelected(false);
+        }
+    }//GEN-LAST:event_wheelchairRouteCheckActionPerformed
+
+    private void walkingRouteCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_walkingRouteCheckActionPerformed
+        //if walking route checked, show stairs option
+        boolean selected = walkingRouteCheck.isSelected();
+        hasStairsCheck.setVisible(selected);
+        hasRampsCheck.setVisible(false);
+        hasLiftsCheck.setVisible(false);
+        if (!selected) {
+            hasStairsCheck.setSelected(false);
+        }
+    }//GEN-LAST:event_walkingRouteCheckActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -277,6 +286,7 @@ public class AddRouteGUI extends javax.swing.JFrame {
     private javax.swing.JButton addRouteBack;
     private javax.swing.JButton addRouteButton;
     private javax.swing.JLabel addRouteGUILabel;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField distanceInput;
     private javax.swing.JLabel distanceLabel;
     private javax.swing.JTextField endInput;
@@ -288,7 +298,7 @@ public class AddRouteGUI extends javax.swing.JFrame {
     private javax.swing.JLabel routeIDLabel;
     private javax.swing.JTextField startInput;
     private javax.swing.JLabel startLabel;
-    private javax.swing.JCheckBox walkingRouteCheck;
-    private javax.swing.JCheckBox wheelchairRouteCheck;
+    private javax.swing.JRadioButton walkingRouteCheck;
+    private javax.swing.JRadioButton wheelchairRouteCheck;
     // End of variables declaration//GEN-END:variables
 }

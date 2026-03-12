@@ -20,6 +20,6 @@ public class WheelchairRoute extends Route{
     
     @Override
     public String toString() {
-        return super.toString() + "\nType of route: Wheelchair route" + "\nHas ramps: " + hasRamps + "\nHas lifts: " + hasLifts;
+        return super.toString() + "\nType of route: Wheelchair route" + "\nHas ramps: " + hasRamps + "\nHas lifts: " + hasLifts + "\n";
     }
 }

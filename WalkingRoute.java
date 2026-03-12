@@ -18,6 +18,6 @@ public class WalkingRoute extends Route {
     @Override
     public String toString() {
         //append extra details onto super toStirng method
-        return super.toString() + "\nType of route: Walking route" + "\nHas stairs: " + hasStairs;
+        return super.toString() + "\nType of route: Walking route" + "\nHas stairs: " + hasStairs + "\n";
     }
 }

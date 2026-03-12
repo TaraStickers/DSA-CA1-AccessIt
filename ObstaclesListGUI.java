@@ -11,12 +11,14 @@ package com.mycompany.dsa.ca1;
 public class ObstaclesListGUI extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ObstaclesListGUI.class.getName());
-
+    private ObstaclesQueue obstaclesQueue;
+    
     /**
      * Creates new form ObstaclesListGUI
      */
-    public ObstaclesListGUI() {
+    public ObstaclesListGUI(ObstaclesQueue obstaclesQueue) {
         initComponents();
+        this.obstaclesQueue = obstaclesQueue;
     }
 
     /**
@@ -39,7 +41,7 @@ public class ObstaclesListGUI extends javax.swing.JFrame {
         getObstaclesBtn.setText("Get obstacles");
         getObstaclesBtn.addActionListener(this::getObstaclesBtnActionPerformed);
 
-        ObstaclesListGUILabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ObstaclesListGUILabel.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 36)); // NOI18N
         ObstaclesListGUILabel.setText("Reported Obstacles");
 
         obstaclesBackBtn.setText("Back");
@@ -53,40 +55,44 @@ public class ObstaclesListGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(134, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(getObstaclesBtn)
                         .addGap(18, 18, 18)
                         .addComponent(obstaclesBackBtn)
-                        .addGap(67, 67, 67)))
-                .addGap(50, 50, 50))
+                        .addGap(191, 191, 191))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(133, 133, 133))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
+                .addGap(144, 144, 144)
                 .addComponent(ObstaclesListGUILabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {getObstaclesBtn, obstaclesBackBtn});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(38, 38, 38)
                 .addComponent(ObstaclesListGUILabel)
-                .addGap(18, 18, 18)
+                .addGap(75, 75, 75)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(obstaclesBackBtn)
                     .addComponent(getObstaclesBtn))
-                .addGap(30, 30, 30))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void getObstaclesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getObstaclesBtnActionPerformed
-        //obstaclesListTextBox.setText(routes.printList());
+        obstaclesListTextBox.setText(obstaclesQueue.printQ());
     }//GEN-LAST:event_getObstaclesBtnActionPerformed
 
     private void obstaclesBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obstaclesBackBtnActionPerformed

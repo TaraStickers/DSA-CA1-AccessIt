@@ -15,8 +15,9 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
     /**
      * Creates new form RecentRoutesGUI
      */
-    public RecentRoutesGUI() {
+    public RecentRoutesGUI(RouteLinkedList routes) {
         initComponents();
+        this.routes = routes;
     }
 
     /**
@@ -64,7 +65,7 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
                         .addGap(96, 96, 96))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(getRoutesBtn)
-                        .addGap(18, 18, 18)
+                        .addGap(40, 40, 40)
                         .addComponent(savedBackBtn)
                         .addGap(163, 163, 163))))
         );
