@@ -275,6 +275,11 @@ public class ReportGUI extends javax.swing.JFrame {
         boolean selected = wheelchairBarrierSelected.isSelected();
         //show options if wheelchair barrier is selected
         wheelchairBarriers.setVisible(selected);
+        //hide walking options
+        walkingBarriers.setVisible(false);
+        //deselect walking subtypes if wheelchair is selected
+        reportWalkRadio.clearSelection();
+        
 
     }//GEN-LAST:event_wheelchairBarrierSelectedActionPerformed
 
@@ -282,6 +287,10 @@ public class ReportGUI extends javax.swing.JFrame {
         boolean selected = walkingBarrierSelected.isSelected();
         //show options if walking barrier is selected
         walkingBarriers.setVisible(selected);
+        //hide wheelchair options
+        wheelchairBarriers.setVisible(false);
+        //deselect subtypes for wheelchair if walking barrier selected
+        reportWheelchairRadio.clearSelection();
     }//GEN-LAST:event_walkingBarrierSelectedActionPerformed
 
     private void barrierBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barrierBackBtnActionPerformed
