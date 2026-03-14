@@ -17,6 +17,7 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
      */
     public RecentRoutesGUI() {
         initComponents();
+        recentRoutesOutput.setText(RecentRoutes.s.toString());
     }
 
     /**
@@ -32,8 +33,7 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
         savedBackBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         recentRoutesOutput = new javax.swing.JTextArea();
-        showRecentBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        deleteRecent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,33 +47,27 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
         recentRoutesOutput.setRows(5);
         jScrollPane2.setViewportView(recentRoutesOutput);
 
-        showRecentBtn.setText("Show recent routes");
-        showRecentBtn.addActionListener(this::showRecentBtnActionPerformed);
-
-        jButton1.setText("Delete most recent");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        deleteRecent.setText("Delete most recent");
+        deleteRecent.addActionListener(this::deleteRecentActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(94, 94, 94))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(SavedRoutesGUILabel)
-                        .addGap(202, 202, 202))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(savedBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(showRecentBtn)
-                .addContainerGap(77, Short.MAX_VALUE))
+                        .addGap(202, 202, 202))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(deleteRecent)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(savedBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(94, 94, 94))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,8 +79,7 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(savedBackBtn)
-                    .addComponent(showRecentBtn)
-                    .addComponent(jButton1))
+                    .addComponent(deleteRecent))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -99,13 +92,10 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_savedBackBtnActionPerformed
 
-    private void showRecentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showRecentBtnActionPerformed
-        recentRoutesOutput.setText(RecentRoutes.s.toString());
-    }//GEN-LAST:event_showRecentBtnActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void deleteRecentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRecentActionPerformed
         RecentRoutes.deleteRecent();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        recentRoutesOutput.setText(RecentRoutes.s.toString());
+    }//GEN-LAST:event_deleteRecentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,10 +104,9 @@ public class RecentRoutesGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel SavedRoutesGUILabel;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton deleteRecent;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea recentRoutesOutput;
     private javax.swing.JButton savedBackBtn;
-    private javax.swing.JButton showRecentBtn;
     // End of variables declaration//GEN-END:variables
 }

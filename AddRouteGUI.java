@@ -239,12 +239,12 @@ public class AddRouteGUI extends javax.swing.JFrame {
 
     private void addRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRouteButtonActionPerformed
         //accept user input
-        String routeID = routeIDInput.getText();
-        String start = startInput.getText();
-        String end = endInput.getText();
+        String routeID = routeIDInput.getText().trim();;
+        String start = startInput.getText().trim();
+        String end = endInput.getText().trim();
         double distance;
         try {
-            distance = Double.parseDouble(distanceInput.getText());
+            distance = Double.parseDouble(distanceInput.getText().trim(););
         } catch (NumberFormatException e){ 
             JOptionPane.showMessageDialog(this, "Please enter a valid number");
             return;

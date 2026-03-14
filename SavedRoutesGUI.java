@@ -18,6 +18,7 @@ public class SavedRoutesGUI extends javax.swing.JFrame {
     public SavedRoutesGUI(RouteLinkedList routes) {
         initComponents();
         this.routes = routes;
+        recentRoutesTextBox.setText(routes.printList());
     }
 
     /**
@@ -33,7 +34,6 @@ public class SavedRoutesGUI extends javax.swing.JFrame {
         savedBackBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         recentRoutesTextBox = new javax.swing.JTextArea();
-        getRoutesBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,9 +47,6 @@ public class SavedRoutesGUI extends javax.swing.JFrame {
         recentRoutesTextBox.setRows(5);
         jScrollPane2.setViewportView(recentRoutesTextBox);
 
-        getRoutesBtn.setText("Get routes");
-        getRoutesBtn.addActionListener(this::getRoutesBtnActionPerformed);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -62,12 +59,11 @@ public class SavedRoutesGUI extends javax.swing.JFrame {
                         .addGap(202, 202, 202))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(96, 96, 96))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(getRoutesBtn)
-                        .addGap(40, 40, 40)
-                        .addComponent(savedBackBtn)
-                        .addGap(163, 163, 163))))
+                        .addGap(96, 96, 96))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(214, 214, 214)
+                .addComponent(savedBackBtn)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,11 +72,9 @@ public class SavedRoutesGUI extends javax.swing.JFrame {
                 .addComponent(SavedRoutesGUILabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(savedBackBtn)
-                    .addComponent(getRoutesBtn))
-                .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(savedBackBtn)
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -92,10 +86,6 @@ public class SavedRoutesGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_savedBackBtnActionPerformed
 
-    private void getRoutesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getRoutesBtnActionPerformed
-        recentRoutesTextBox.setText(routes.printList());
-    }//GEN-LAST:event_getRoutesBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -103,7 +93,6 @@ public class SavedRoutesGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel SavedRoutesGUILabel;
-    private javax.swing.JButton getRoutesBtn;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea recentRoutesTextBox;
     private javax.swing.JButton savedBackBtn;

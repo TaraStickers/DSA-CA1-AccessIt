@@ -316,9 +316,9 @@ public class ObstacleReportGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_barrierBackBtnActionPerformed
 
     private void reportObstacleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportObstacleBtnActionPerformed
-        String location = barrierLocationInput.getText();
-        String description = descriptionInput.getText();
-        String routeID = routeIDInput.getText();
+        String location = barrierLocationInput.getText().trim();
+        String description = descriptionInput.getText().trim();
+        String routeID = routeIDInput.getText().trim();
         String barrierType = "";
         String subType = "";
         //if its a walking barrier

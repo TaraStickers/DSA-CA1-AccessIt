@@ -275,8 +275,8 @@ public class UpdateObstacleGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void barrierBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barrierBackBtnActionPerformed
-        MenuGUI menuGui = new MenuGUI();
-        menuGui.setVisible(true);
+        ObstaclesListGUI obstaclesGUI = new ObstaclesListGUI(obstaclesQueue);
+        obstaclesGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_barrierBackBtnActionPerformed
 
@@ -314,10 +314,10 @@ public class UpdateObstacleGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_wheelchairBarrierSelectedActionPerformed
 
     private void updateObstacleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateObstacleBtnActionPerformed
-        String routeID = routeIDInput.getText();
+        String routeID = routeIDInput.getText().trim();
         
-        String newLocation = barrierLocationInput.getText();
-        String newDescription = descriptionInput.getText();
+        String newLocation = barrierLocationInput.getText().trim();
+        String newDescription = descriptionInput.getText().trim();
         String newBarrierType = "";
         String newSubType = "";
         //if its a walking barrier
@@ -357,7 +357,7 @@ public class UpdateObstacleGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Obstacle updated successfully!");
             successLabel.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Error updating obstalce");
+            JOptionPane.showMessageDialog(this, "Error updating obstacle, RouteID not found");
         }
         
         

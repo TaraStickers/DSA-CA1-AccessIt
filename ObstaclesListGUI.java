@@ -21,6 +21,7 @@ public class ObstaclesListGUI extends javax.swing.JFrame {
         initComponents();
         this.obstaclesQueue = obstaclesQueue;
         successLabel.setVisible(false);
+        obstaclesListTextBox.setText(obstaclesQueue.printQ());
     }
 
     /**
@@ -32,7 +33,7 @@ public class ObstaclesListGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        getObstaclesBtn = new javax.swing.JButton();
+        refreshObstaclesBtn = new javax.swing.JButton();
         ObstaclesListGUILabel = new javax.swing.JLabel();
         obstaclesBackBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -45,8 +46,8 @@ public class ObstaclesListGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        getObstaclesBtn.setText("Get obstacles");
-        getObstaclesBtn.addActionListener(this::getObstaclesBtnActionPerformed);
+        refreshObstaclesBtn.setText("Refresh");
+        refreshObstaclesBtn.addActionListener(this::refreshObstaclesBtnActionPerformed);
 
         ObstaclesListGUILabel.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 36)); // NOI18N
         ObstaclesListGUILabel.setText("Reported Obstacles");
@@ -79,10 +80,10 @@ public class ObstaclesListGUI extends javax.swing.JFrame {
                 .addComponent(ObstaclesListGUILabel)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
+                .addContainerGap(138, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(getObstaclesBtn)
+                        .addComponent(refreshObstaclesBtn)
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(updateObstacleBtn)
                         .addGap(18, 18, 18)
@@ -100,7 +101,7 @@ public class ObstaclesListGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {getObstaclesBtn, obstaclesBackBtn});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {obstaclesBackBtn, refreshObstaclesBtn});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +110,7 @@ public class ObstaclesListGUI extends javax.swing.JFrame {
                 .addComponent(ObstaclesListGUILabel)
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(getObstaclesBtn)
+                    .addComponent(refreshObstaclesBtn)
                     .addComponent(obstaclesBackBtn)
                     .addComponent(updateObstacleBtn))
                 .addGap(18, 18, 18)
@@ -128,12 +129,12 @@ public class ObstaclesListGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void getObstaclesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getObstaclesBtnActionPerformed
+    private void refreshObstaclesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshObstaclesBtnActionPerformed
         obstaclesListTextBox.setText(obstaclesQueue.printQ());
         //hide success label when get obstacles (refresh) is clicked
         successLabel.setVisible(false);
 
-    }//GEN-LAST:event_getObstaclesBtnActionPerformed
+    }//GEN-LAST:event_refreshObstaclesBtnActionPerformed
 
     private void obstaclesBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obstaclesBackBtnActionPerformed
         MenuGUI menuGui = new MenuGUI();
@@ -164,11 +165,11 @@ public class ObstaclesListGUI extends javax.swing.JFrame {
     private javax.swing.JLabel ObstaclesListGUILabel;
     private javax.swing.JButton delObstacleBtn;
     private javax.swing.JTextField delObstacleInput;
-    private javax.swing.JButton getObstaclesBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton obstaclesBackBtn;
     private javax.swing.JTextArea obstaclesListTextBox;
+    private javax.swing.JButton refreshObstaclesBtn;
     private javax.swing.JLabel successLabel;
     private javax.swing.JButton updateObstacleBtn;
     // End of variables declaration//GEN-END:variables
