@@ -128,7 +128,7 @@ public class MenuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_viewRoutesBtnActionPerformed
 
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
-        ReportGUI reportGui = new ReportGUI(obstaclesQueue);
+        ObstacleReportGUI reportGui = new ObstacleReportGUI(obstaclesQueue);
         reportGui.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_reportBtnActionPerformed

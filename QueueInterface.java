@@ -14,6 +14,7 @@ public interface QueueInterface {
     public int size();
     public Obstacles frontElement();
     public void enqueue(Obstacles obstacle);
-    public Obstacles dequeue();
+    public Obstacles dequeue(String routeID);
+    public boolean updateObstacles(String routeID, Obstacles obstacle);
 
 }

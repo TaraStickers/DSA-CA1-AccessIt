@@ -11,8 +11,9 @@ import java.util.*;
  * @author taraj
  */
 public class ObstaclesQueue implements QueueInterface {
-
+    
     private ArrayList<Obstacles> obstacleQueue;
+    private ObstaclesQueue obstaclesQueue;
     
     //CREATE INSTANCE OF QUEUE CLASS
     public ObstaclesQueue() {
@@ -44,15 +45,22 @@ public class ObstaclesQueue implements QueueInterface {
         //add new object to end of queue
         obstacleQueue.add(obstacle);
     }
-
-    public Obstacles dequeue() {
-        //check if queue is empty
-        if (obstacleQueue.size() > 0) {
-            //if not, remove object at index 0 (first element)are
-            return obstacleQueue.remove(0);
-        } else {
-            return null;
+    
+    //delete
+    public Obstacles dequeue(String routeID) {
+        for (int i = 0; i < obstacleQueue.size(); i++) {
+            //set current obstacle queue object in i as currentObstacle
+            Obstacles currentObstacle = obstacleQueue.get(i);
+            //if current obstacle in loops RouteId matches user entered routeID
+            //changed SAVED routeID to lowercase for comparison
+            //ENTERED routeID changed to lowercase during input
+            if (currentObstacle.getRouteID().equals(routeID.toLowerCase())) {
+                //remove the currentObstacle (delete it)
+                return obstacleQueue.remove(i);
+            }
+            
         }
+        return null;
     }
     //method to print the queue
     public String printQ() {
@@ -66,4 +74,21 @@ public class ObstaclesQueue implements QueueInterface {
         //return queueu output 
         return queueOutput;
     }
+    
+    @Override
+    public boolean updateObstacles(String routeID, Obstacles obstacle){
+        //iterate through obstacle queue
+        for (int i = 0; i < obstacleQueue.size(); i++) {
+            //set current obstacle to obstacle at i 
+            Obstacles currentObstacle = obstacleQueue.get(i);
+            //if current obstacle route id is the same as entered routeid
+            if(currentObstacle.getRouteID().equalsIgnoreCase(routeID)) {
+                //set obstacle in current i location to the updated obstacle
+                obstacleQueue.set(i, obstacle);
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

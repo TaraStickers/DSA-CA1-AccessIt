@@ -4,6 +4,8 @@
  */
 package com.mycompany.dsa.ca1;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author taraj
@@ -70,6 +72,12 @@ public class AddRouteGUI extends javax.swing.JFrame {
 
         distanceLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         distanceLabel.setText("Distance (km):");
+
+        startInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startInputActionPerformed(evt);
+            }
+        });
 
         routeIDInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,7 +242,13 @@ public class AddRouteGUI extends javax.swing.JFrame {
         String routeID = routeIDInput.getText();
         String start = startInput.getText();
         String end = endInput.getText();
-        double distance = Double.parseDouble(distanceInput.getText());
+        double distance;
+        try {
+            distance = Double.parseDouble(distanceInput.getText());
+        } catch (NumberFormatException e){ 
+            JOptionPane.showMessageDialog(this, "Please enter a valid number");
+            return;
+        }
         boolean walkingRoute = walkingRouteCheck.isSelected();
         boolean wheelchairRoute = wheelchairRouteCheck.isSelected();
         successLabel.setVisible(true);
@@ -286,6 +300,8 @@ public class AddRouteGUI extends javax.swing.JFrame {
             hasRampsCheck.setSelected(false);
             hasLiftsCheck.setSelected(false);
         }
+        //hide success label when new route being inputted
+        successLabel.setVisible(false);
     }//GEN-LAST:event_wheelchairRouteCheckActionPerformed
 
     private void walkingRouteCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_walkingRouteCheckActionPerformed
@@ -302,7 +318,14 @@ public class AddRouteGUI extends javax.swing.JFrame {
         if (!selected) {
             hasStairsCheck.setSelected(false);
         }
+        //hide success label when new route being inputted
+        successLabel.setVisible(false);
     }//GEN-LAST:event_walkingRouteCheckActionPerformed
+
+    private void startInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startInputActionPerformed
+        
+        
+    }//GEN-LAST:event_startInputActionPerformed
 
     /**
      * @param args the command line arguments
