@@ -244,7 +244,7 @@ public class AddRouteGUI extends javax.swing.JFrame {
         String end = endInput.getText().trim();
         double distance;
         try {
-            distance = Double.parseDouble(distanceInput.getText().trim(););
+            distance = Double.parseDouble(distanceInput.getText().trim());
         } catch (NumberFormatException e){ 
             JOptionPane.showMessageDialog(this, "Please enter a valid number");
             return;
